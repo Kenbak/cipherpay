@@ -58,13 +58,12 @@ export default function PrivacyPage() {
           <P>
             Our Shopify app requests <Code>read_orders</Code> and <Code>write_orders</Code> permissions
             to create payment invoices and mark orders as paid. We read order amounts
-            and product names to generate invoices. Shopify responses can contain customer information. We use a customer ID or checkout token only to authorize access to the correct order;
-            payment mappings retain the order ID, invoice ID, amount, currency and status.
+            and product names to generate invoices. Shopify responses can contain customer information. Payment mappings retain the order ID, invoice ID, amount, currency and status.
           </P>
           <P>
             Payment session data (order ID, amount, invoice reference) is stored
-            for 30 days to support retries and reconciliation. Failed fulfillment jobs remain until resolved or the shop is deleted.
-            Operational credentials are encrypted before storage. Uninstall revokes settings sessions and removes shop credentials.
+            for up to 30 days to support retries and reconciliation. Where durable fulfillment retries are enabled, failed jobs remain until resolved or the shop is deleted.
+            The integration also stores operational access tokens, API keys and webhook secrets in its server-side data store. Uninstall requests remove shop credentials.
           </P>
         </Section>
 
@@ -83,7 +82,7 @@ export default function PrivacyPage() {
 
         <Section id="05" title="Data retention">
           <P>
-            Prepaid agent sessions expire after 24 hours; Shopify payment mappings expire after 30 days.
+            Prepaid agent sessions expire after 24 hours; Shopify payment mappings expire within 30 days.
             Optional attendee details are removed after successful registration, after seven days for expired/refunded invoices,
             or after 30 days otherwise. Merchant invoice records remain while the account is active for payment reconciliation.
             Account deletion removes related operational records atomically. Minimal transaction-consumption records remain
@@ -94,8 +93,7 @@ export default function PrivacyPage() {
         <Section id="06" title="Security">
           <P>
             All API communication uses TLS encryption. Webhook signatures are
-            verified using HMAC-SHA256. Access tokens and API keys are stored
-            with application-level encryption and access controls. CipherPay does not require wallet seeds or spending keys.
+            verified using HMAC-SHA256. Backend API keys are stored as hashes; incoming viewing keys and backend webhook secrets use application-level encryption. Integration services restrict access to their operational credentials. CipherPay does not require wallet seeds or spending keys.
           </P>
         </Section>
 
