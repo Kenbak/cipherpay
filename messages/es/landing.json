@@ -1,6 +1,6 @@
 {
   "heroTitle": "Pagos <purple>privados</purple> para internet.",
-  "heroSubtitle": "Acepta Zcash en minutos. Sin custodia. Cero datos del comprador. Sin intermediarios.",
+  "heroSubtitle": "Acepta Zcash en minutos. Sin custodia. Pago privado.",
   "logoBar": {
     "ariaLabel": "Integraciones compatibles",
     "label": "Funciona con tu stack"
@@ -23,7 +23,7 @@
   "privacy": {
     "title": "QUÉ PERMANECE PRIVADO",
     "subtitle": "Tus clientes no son el producto",
-    "intro": "Procesadores de tarjetas y cripto transparente exponen compradores. CipherPay no recopila nada de quien paga.",
+    "intro": "El pago estándar no solicita la identidad del comprador. Las integraciones opcionales y el alojamiento procesan los datos descritos en nuestra política de privacidad.",
     "typicalCheckout": "CHECKOUT TÍPICO",
     "cipherpayCheckout": "CHECKOUT CIPHERPAY",
     "Row1": "Nombre y email del comprador",
@@ -42,7 +42,7 @@
   "feature1Title": "01 // Sin Custodia",
   "feature1Desc": "Tus claves, tus fondos. CipherPay nunca retiene tu ZEC. Los pagos van directamente a tu dirección blindada.",
   "feature2Title": "02 // Totalmente Blindado",
-  "feature2Desc": "Cada pago usa transacciones blindadas de Zcash. Sin direcciones transparentes, sin filtración de metadatos.",
+  "feature2Desc": "Los pagos usan direcciones blindadas de Zcash para ocultar sus detalles al público.",
   "feature3Title": "03 // Pagos Agénticos",
   "feature3Desc": "Acepta ZEC de agentes de IA via protocolos x402 y MPP. Sesiones prepagadas para acceso de alta frecuencia. Un middleware.",
   "x402Link": "x402",

@@ -4,10 +4,10 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy — CipherPay',
-  description: 'How CipherPay handles your data. Short version: we don\'t collect it.',
+  description: 'How CipherPay processes payment, account, and optional integration data.',
 };
 
-const lastUpdated = 'March 17, 2026';
+const lastUpdated = 'September 8, 2026';
 
 export default function PrivacyPage() {
   return (
@@ -36,19 +36,21 @@ export default function PrivacyPage() {
             operate the service.
           </P>
           <P>
-            <Strong>From customers (buyers):</Strong> We do not collect or store any personal
-            information from customers who pay through CipherPay. No names, no email
-            addresses, no physical addresses, no phone numbers, no IP addresses.
+            <Strong>From customers (buyers):</Strong> Standard checkout does not request a buyer name,
+            email, shipping address or phone number. The merchant&apos;s shop may collect these separately.
+            Optional event registration asks for a name and email and sends them to the merchant&apos;s Luma event.
+            Shopify order authorization may process a customer ID or checkout token. These are not included in payment invoices.
           </P>
           <P>
-            <Strong>Payment data:</Strong> We store invoice amounts, currency, Zcash payment
-            addresses, and transaction status. Zcash shielded transactions are
-            private by design — we cannot see the sender&apos;s address or the
-            transaction amount on-chain when shielded pools are used.
+            <Strong>Payment data:</Strong> We store invoice amounts, currency, payment addresses, transaction IDs,
+            product descriptions and payment status. A merchant-provided incoming viewing key lets CipherPay read incoming
+            amounts and memos for that account; it cannot spend funds. Use a dedicated commerce wallet account to limit visibility.
+            Shielded payment details are hidden from public observers, but incoming amounts are visible to CipherPay and the recipient.
           </P>
           <P>
-            <Strong>Analytics:</Strong> We do not use third-party analytics, tracking pixels,
-            or cookies on checkout pages.
+            <Strong>Website operation:</Strong> We do not use advertising trackers. Essential cookies support
+            language selection and authenticated sessions. Hosting and security providers process network metadata,
+            including IP addresses, to deliver and protect the service.
           </P>
         </Section>
 
@@ -56,20 +58,21 @@ export default function PrivacyPage() {
           <P>
             Our Shopify app requests <Code>read_orders</Code> and <Code>write_orders</Code> permissions
             to create payment invoices and mark orders as paid. We read order amounts
-            and product names to generate invoices. We do not read or store customer
-            personal information from Shopify orders.
+            and product names to generate invoices. Shopify responses can contain customer information. We use a customer ID or checkout token only to authorize access to the correct order;
+            payment mappings retain the order ID, invoice ID, amount, currency and status.
           </P>
           <P>
             Payment session data (order ID, amount, invoice reference) is stored
-            temporarily with a 24-hour expiration. Shop configuration (access token,
-            API keys) is stored securely in encrypted Redis and deleted when the
-            app is uninstalled.
+            for 30 days to support retries and reconciliation. Failed fulfillment jobs remain until resolved or the shop is deleted.
+            Operational credentials are encrypted before storage. Uninstall revokes settings sessions and removes shop credentials.
           </P>
         </Section>
 
         <Section id="04" title="Data sharing">
           <P>
-            We do not sell, rent, or share data with third parties. Period.
+            We do not sell personal data. Hosting providers and Upstash process service data on our behalf.
+            Resend processes merchant recovery and billing emails when configured. Luma receives attendee details when a buyer
+            chooses an integrated event registration. Shopify receives order payment updates. Merchants receive invoice webhooks.
           </P>
           <P>
             Invoice data is processed through the Zcash blockchain, which is a public
@@ -80,10 +83,11 @@ export default function PrivacyPage() {
 
         <Section id="05" title="Data retention">
           <P>
-            Payment sessions expire automatically after 24 hours. Merchant account
-            data is retained while the account is active and deleted upon request
-            or app uninstallation. We comply with Shopify&apos;s mandatory data
-            deletion webhooks.
+            Prepaid agent sessions expire after 24 hours; Shopify payment mappings expire after 30 days.
+            Optional attendee details are removed after successful registration, after seven days for expired/refunded invoices,
+            or after 30 days otherwise. Merchant invoice records remain while the account is active for payment reconciliation.
+            Account deletion removes related operational records atomically. Minimal transaction-consumption records remain
+            to prevent old deposits being spent again and contain no merchant identity or bearer token. Backups have a separate retention period.
           </P>
         </Section>
 
@@ -91,16 +95,14 @@ export default function PrivacyPage() {
           <P>
             All API communication uses TLS encryption. Webhook signatures are
             verified using HMAC-SHA256. Access tokens and API keys are stored
-            in encrypted Redis with access controls. We never log secrets,
-            seeds, or private keys.
+            with application-level encryption and access controls. CipherPay does not require wallet seeds or spending keys.
           </P>
         </Section>
 
         <Section id="07" title="Your rights">
           <P>
             You can request access to, correction of, or deletion of your data
-            at any time by contacting us. Merchants can delete all stored data
-            by uninstalling the CipherPay app from their platform.
+            at any time by contacting us. Uninstalling the Shopify app removes its connection; deleting the CipherPay merchant account removes its invoice and account records, subject to the replay-prevention and backup retention described above.
           </P>
         </Section>
 

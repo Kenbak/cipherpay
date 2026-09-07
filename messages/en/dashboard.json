@@ -402,7 +402,7 @@
     "title": "Events",
     "subtitle": "Create events with ticket sales. Each event generates a product and checkout link.",
     "addEvent": "+ CREATE EVENT",
-    "backToEvents": "\u2190 BACK TO EVENTS",
+    "backToEvents": "← BACK TO EVENTS",
     "cancelEvent": "CANCEL EVENT",
     "titleLabel": "Event Title",
     "titlePlaceholder": "ZEC Privacy Summit 2026",
@@ -507,8 +507,8 @@
     "toastKeyFailed": "Failed to save Luma API key"
   },
   "refundModal": {
-    "title": "Confirm Refund",
-    "description": "This will mark the invoice as REFUNDED. This action cannot be undone. If you have sent ZEC back to the buyer, paste the transaction ID below as proof.",
+    "title": "Record an external refund",
+    "description": "Send the refund from your own wallet first. This only records your report; CipherPay does not send funds or verify that the buyer received them.",
     "txidLabel": "Refund Transaction ID (optional)",
     "txidPlaceholder": "Paste the txid of your refund transaction",
     "confirmRefund": "CONFIRM REFUND",

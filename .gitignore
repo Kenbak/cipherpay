@@ -11,3 +11,5 @@ next-env.d.ts
 # Cursor IDE
 .cursor/
 .agents/
+.vercel
+.env*
